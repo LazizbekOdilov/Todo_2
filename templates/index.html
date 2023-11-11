@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      {% load static %}
+    <title>To-Do List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+  </head>
+  <body>
+    <div class="container">
+        <div class="head">
+            <h1>To-Do List</h1>
+            <div style="display: flex; align-items: center;">
+                <h3>{{ foydalanuvchi }}</h3>
+                <a href="/logout/" style="text-decoration: none; color: red;">
+                    Log out
+                </a>
+            </div>
+      </div>
+
+      <div class="task-add">
+        <form id="task-form" method="post">{% csrf_token %}
+            <div class="form1">
+              <input type="text" value="{{rejalar.t_name}}" name="t_name" placeholder="Add Task...">
+              <input type="date" value="{{ rejalar.sana }}" name="sana">
+              <select name="t_status">
+                <option class="opt">
+                  Not started
+                </option>
+                <option class="opt">
+                  In progress
+                </option>
+                <option class="opt">
+                  Completed
+                </option>
+              </select>
+            </div>
+            <div class="fomr1">{% csrf_token %}
+              <input type="text" value="{{ rejalar.t_datail }}" name="t_datail" placeholder="Details ...">
+              <button type="submit" class="btn">Add Task</button>
+            </div>
+          </form>
+      </div>
+      <hr style="margin: 10px 5px;">
+        {% for i in rejalar %}
+      <div class="task">
+        <ul id="task-list">
+          <li>
+              <div>
+                  {{ i.t_name }}
+              </div>
+              <div>
+                    <input type="text" value="{{ i.t_datail }}" readonly >
+                    <input type="date" value="{{ i.sana }}" readonly>
+                    <button type="submit" class="edit"><a href="./edit.html">Edit</a></button>
+                    <button type="submit" class="delete"><a href="./edit.html">Delete</a></button>
+              </div>
+          </li>
+        </ul>
+        <ul class="details">
+            {{ i.t_status }}
+        </ul>
+      </div>
+        {% endfor %}
+    </div>
+  </body>
+</html>
