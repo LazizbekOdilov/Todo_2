@@ -11,4 +11,5 @@ urlpatterns = [
     path('edit/', edit),
     path('', login_view),
     path('logout/', logout_view),
+    path('delete/<int:son>/', delete_reja),
        ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

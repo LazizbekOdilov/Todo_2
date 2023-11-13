@@ -39,3 +39,7 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("/")
+
+def delete_reja(request, son):
+    Reja.objects.get(id=son).delete()
+    return redirect("/index/")
